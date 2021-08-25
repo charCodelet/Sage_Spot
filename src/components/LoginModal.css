@@ -1,0 +1,41 @@
+.authentication {
+    width: 90%;
+    max-width: 25rem;
+    margin: 7rem auto;
+    text-align: center;
+    /* position: relative; */
+    /* margin: 0; */
+    margin: 1rem 0;
+    /* box-shadow: 0 2px 8px rgb(0 0 0 / 26%); */
+    border-radius: 6px;
+    padding: 1rem;
+    /* overflow: hidden; */
+    /* background: white; */
+}
+
+.authentication__button {
+    font: inherit;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid black;
+    border-radius: 4px;
+    background: #b1acac;
+    color: white;
+    cursor: pointer;
+    margin-right: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.authentication__label {
+  display: block;
+  margin: 2em;
+}
+
+.authentication__input {
+  width: 100%;
+    font: inherit;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    padding: 0.15rem 0.25rem;
+}

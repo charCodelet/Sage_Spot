@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-
 import Modal from './Modal';
-// import Button from '../FormElements/Button';
+import './LoginModal.css';
 
 const LoginModal: React.FC<any> = props => {
-  
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,33 +15,25 @@ const LoginModal: React.FC<any> = props => {
   }
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-  
-
     await fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
       method: 'POST', 
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ name, password }) // body data type must match "Content-Type" header
     })
     .then(v => v.json())
-    .then(v => {     
-      props.handleToken(v)
-    });
-   
+    .then(v => props.handleToken(v));
   }
   return (
     <Modal
       onCancel={props.onClear}
-      header="Login"
+      header="Enter your name and password"
       show={props.error}
-      footer={<button onClick={props.onClear}>Cancel</button>}
     >
-    <div>
-      <label htmlFor='name'>Name<input onChange={handleName} name={name} value={name}/></label>
-      <label htmlFor='password'>Password<input onChange={handlePassword} name={password} value={password}/></label>
-      <button onClick={handleSubmit}>Login</button>
-    </div>
-    
-      
+      <div className="authentication">
+        <label className="authentication__label" htmlFor='name'>Name<input className="authentication__input" onChange={handleName} name={name} value={name}/></label>
+        <label className="authentication__label" htmlFor='password'>Password<input className="authentication__input" onChange={handlePassword} name={password} value={password}/></label>
+        <button className="authentication__button" onClick={handleSubmit}>Login</button>
+      </div>
     </Modal>
   );
 };

@@ -11,12 +11,10 @@ import './App.css';
 
 function App() {
   const [error, setError] = useState<boolean>(false);
-  const [error2, setError2] = useState<boolean>(false);
   const [token, setToken] = useState('');
   const [photo, setPhoto] = useState('');
 
   const clearError = () => { 
-    console.log('clear error')
     setError(false);
   };
 
@@ -36,14 +34,12 @@ function App() {
     setPhoto(photo)
   }
 
-  let routes;
-
+  let routes: {};
   if (token) {
-    console.log(token,` --> token`);
       routes = (
         <Switch>
           <Route path="/login" exact>        
-            <MainNavigation error2={photo} token={token} onClear={clearPhoto} handlePhoto={handlePhoto}/>            
+            <MainNavigation /*error2={photo}*/ token={token} photoIndex={photo} onClear={clearPhoto} handlePhoto={handlePhoto}/>            
           </Route>     
           <Redirect to="/login" />
         </Switch>
@@ -62,19 +58,8 @@ function App() {
         </header>
       </div>
     )
-  
   }
-  return (
-    <>
-    <Router>
-     
-    
-    {routes}
-    </Router>
-    </>
-   
-  );
-
+  return <Router>{routes}</Router>;
 }
 
 export default App;
