@@ -20,8 +20,15 @@ const LoginModal: React.FC<any> = props => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ name, password }) // body data type must match "Content-Type" header
     })
-    .then(v => v.json())
-    .then(v => props.handleToken(v));
+    .then(v => {
+      if(v.ok) {
+        if(document.getElementById("sb_widget")) document.getElementById("sb_widget").style.display = 'block';
+      }
+      return v.json()
+    })
+    .then(v => {
+      props.handleToken(v)
+    });
   }
   return (
     <Modal

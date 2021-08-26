@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom';
 import LoginModal from './components/LoginModal';
 import MainNavigation from './components/MainNavigation';
+import SendBird from 'sendbird';
+import SendBirdWidget from './widget.SendBird';
 import './App.css';
 
 function App() {
@@ -34,12 +36,19 @@ function App() {
     setPhoto(photo)
   }
 
+  useEffect(() => {
+    window.SendBird = SendBird;
+    SendBirdWidget.start('9DA1B1F4-0BE6-4DA8-82C5-2E81DAB56F23'); // Sample APP_ID: '9DA1B1F4-0BE6-4DA8-82C5-2E81DAB56F23'
+  })
+
+
   let routes: {};
   if (token) {
       routes = (
         <Switch>
           <Route path="/login" exact>        
-            <MainNavigation /*error2={photo}*/ token={token} photoIndex={photo} onClear={clearPhoto} handlePhoto={handlePhoto}/>            
+            <MainNavigation token={token} photoIndex={photo} onHome={clearError} onClear={clearPhoto} handlePhoto={handlePhoto} handleToken={handleToken}/>    
+           
           </Route>     
           <Redirect to="/login" />
         </Switch>
@@ -59,7 +68,13 @@ function App() {
       </div>
     )
   }
-  return <Router>{routes}</Router>;
+  return (
+    <Router>
+      {routes}
+      {token && <div id="sb_widget" />}  
+      {/* <div style={{display: "none"}} id="sb_widget" />       */}
+    </Router>
+  )
 }
 
 export default App;

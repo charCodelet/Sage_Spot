@@ -15,6 +15,8 @@
 }
 
 .main-navigation__images {
+  width: 8%;
+  cursor: pointer;
   border-radius: 50%;
 }
 
